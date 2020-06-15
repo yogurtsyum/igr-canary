@@ -34,7 +34,8 @@ game.Players.PlayerAdded:connect(function(player)
 					print(res);
 					print('all done')
 				end
-		else if args[1] == "promote" then
+			end
+		elseif args[1] == "promote" then
 			print('promote running')
 			local user = args[2]
 			if(user) then
@@ -42,12 +43,12 @@ game.Players.PlayerAdded:connect(function(player)
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
 					print('passed rank check')
 					print(server..'setrank?user='..user..'&key'..key)
-					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..ke..'&author='..player.Namey)
+					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..key..'&author='..player.Namey)
 					print(res);
 					print('all done')
 				end
 			end
-		else if args[1] == "demote" then
+		elseif args[1] == "demote" then
 			print('demote running')
 			local user = args[2]
 			if(user) then
@@ -60,7 +61,7 @@ game.Players.PlayerAdded:connect(function(player)
 					print('all done')
 				end
 			end
-		else if args[1] == "fire" then
+		elseif args[1] == "fire" then
 			print('fire running')
 			local user = args[2]
 			if(user) then
@@ -72,7 +73,7 @@ game.Players.PlayerAdded:connect(function(player)
 					print('all done')
 				end
 			end
-		else if args[1] == "shout" then
+		elseif args[1] == "shout" then
 			print('shout running')
 			msg = table.concat(args, ' ')
 			print('passed argument check')
@@ -83,5 +84,6 @@ game.Players.PlayerAdded:connect(function(player)
 				print(res);
 				print('all done')
 			end
-	end
-end
+		end
+	end)
+end)
