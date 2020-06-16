@@ -80,7 +80,7 @@ game.Players.PlayerAdded:connect(function(player)
 			if(player:GetRankInGroup(groupId) >= requiredRank) then
 				print('passed rank check')
 				print(server..'shout?msg='..user)
-				local res = HttpService:GetAsync(server..'shout?user='..user..'&rank='..rank..'&key='..key..'&author='..player.Name)
+				local res = HttpService:GetAsync(server..'shout?msg='..msg..'&key='..key..'&author='..player.Name)
 				print(res);
 				print('all done')
 			end
