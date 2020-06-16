@@ -1,11 +1,11 @@
 print('Loaded commands')
 
-local groupId = 3281575;
-local requiredRank = 255;
+local groupId = 123456;
+local requiredRank = 10;
 local maxRank = 255;
-local server = 'URL'
+local server = 'https://PROJECT-NAME.glitch.me/'
 local HttpService = game:GetService('HttpService')
-local key = 'key'
+local key = 'KEY'
 
 function slice(tbl, first, last, step)
   local sliced = {}
@@ -42,8 +42,8 @@ game.Players.PlayerAdded:connect(function(player)
 				print('passed argument check')
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
 					print('passed rank check')
-					print(server..'setrank?user='..user..'&key'..key)
-					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..key..'&author='..player.Namey)
+					print(server..'promote?user='..user..'&key='..key..'&author='..player.Name)
+					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..key..'&author='..player.Name)
 					print(res);
 					print('all done')
 				end
@@ -79,8 +79,8 @@ game.Players.PlayerAdded:connect(function(player)
 			print('passed argument check')
 			if(player:GetRankInGroup(groupId) >= requiredRank) then
 				print('passed rank check')
-				print(server..'shout?msg='..user)
-				local res = HttpService:GetAsync(server..'shout?user='..user..'&rank='..rank..'&key='..key..'&author='..player.Name)
+				print(server..'shout?msg='..msg)
+				local res = HttpService:GetAsync(server..'shout?msg='..msg..'&key='..key..'&author='..player.Name)
 				print(res);
 				print('all done')
 			end
