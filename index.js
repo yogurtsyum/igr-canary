@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
     res.sendStatus(200);
   });
   
-app.get('/setrank', (req, res) => {
+app.get('/setrank', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
     if(!req.query.username || !req.query.rank || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
@@ -79,7 +79,7 @@ app.get('/setrank', (req, res) => {
     });
 });
   
-app.get('/promote', (req, res) => {
+app.get('/promote', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
     if(!req.query.username || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
@@ -123,7 +123,7 @@ app.get('/promote', (req, res) => {
     });
 });
 
-app.get('/demote', (req, res) => {
+app.get('/demote', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
     if(!req.query.username || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
@@ -167,7 +167,7 @@ app.get('/demote', (req, res) => {
     });
 });
 
-app.get('/fire', (req, res) => {
+app.get('/fire', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
     if(!req.query.username || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
@@ -211,7 +211,7 @@ app.get('/fire', (req, res) => {
     });
 });
 
-app.get('/shout', (req, res) => {
+app.get('/shout', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
     if(!req.query.author) return res.sendStatus(400);
     let msg = req.query.msg;
