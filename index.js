@@ -63,7 +63,7 @@ app.get('/setrank', async (req, res) => {
     fetch(config.logwebhook, {
         method: 'POST',
         headers: {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             color: 2127726,
@@ -107,7 +107,7 @@ app.get('/promote', async (req, res) => {
     fetch(config.logwebhook, {
         method: 'POST',
         headers: {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             color: 2127726,
@@ -151,7 +151,7 @@ app.get('/demote', async (req, res) => {
     fetch(config.logwebhook, {
         method: 'POST',
         headers: {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             color: 2127726,
@@ -195,7 +195,7 @@ app.get('/fire', async (req, res) => {
     fetch(config.logwebhook, {
         method: 'POST',
         headers: {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             color: 2127726,
@@ -228,7 +228,7 @@ app.get('/shout', async (req, res) => {
     fetch(config.logwebhook, {
         method: 'POST',
         headers: {
-            'Content Type': 'application/json'
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({
             color: 2127726,
