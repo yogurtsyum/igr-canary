@@ -4,7 +4,7 @@ const chalk = require('chalk');
 const roblox = require('noblox.js');
 const figlet = require('figlet');
 const fetch = require('node-fetch');
-const config = require('../config.json');
+const config = require('./config.json');
 
 roblox.setCookie(config.cookie);
 
@@ -27,13 +27,13 @@ async function getRankFromName(func_rankname, func_group){
     return role.rank;
 }
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.sendStatus(200);
   });
   
 app.get('/setrank', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.username || !req.query.rank || !req.query.author) return res.sendStatus(400);
+    if(!req.query.user || !req.query.rank || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let rank = Number(req.query.rank);
     if(!rank){
@@ -81,7 +81,7 @@ app.get('/setrank', async (req, res) => {
   
 app.get('/promote', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.username || !req.query.author) return res.sendStatus(400);
+    if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
     try {
@@ -125,7 +125,7 @@ app.get('/promote', async (req, res) => {
 
 app.get('/demote', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.username || !req.query.author) return res.sendStatus(400);
+    if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
     try {
@@ -169,7 +169,7 @@ app.get('/demote', async (req, res) => {
 
 app.get('/fire', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.username || !req.query.author) return res.sendStatus(400);
+    if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
     try {
@@ -213,7 +213,7 @@ app.get('/fire', async (req, res) => {
 
 app.get('/shout', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.author) return res.sendStatus(400);
+    if(!req.query.user) return res.sendStatus(400);
     let msg = req.query.msg;
     let shoutResponse;
     try {
