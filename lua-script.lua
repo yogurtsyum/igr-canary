@@ -1,5 +1,3 @@
-print('Loaded commands')
-
 local groupId = 3281575;
 local requiredRank = 255;
 local maxRank = 255;
