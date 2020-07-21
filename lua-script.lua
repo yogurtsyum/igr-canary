@@ -1,6 +1,5 @@
 local groupId = 123;
 local requiredRank = 255;
-local maxRank = 255;
 local server = 'URL'
 local HttpService = game:GetService('HttpService')
 local key = 'key'
