@@ -222,7 +222,6 @@ app.get('/shout', async (req, res) => {
         console.log(chalk.red('An error occured when running the shout function: ' + err));
         return res.sendStatus(500);
     }
-    let newRankName = await getRankName(config.groupId, id);
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
@@ -238,7 +237,7 @@ app.get('/shout', async (req, res) => {
             },
             timestamp: new Date(),
             thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
+                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${req.query.author}`
             }
         })
     });
