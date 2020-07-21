@@ -189,7 +189,6 @@ app.get('/fire', async (req, res) => {
         console.log(chalk.red('An error occured when running the fire function: ' + err));
         return res.sendStatus(500);
     }
-    let newRankName = await getRankName(config.groupId, id);
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
