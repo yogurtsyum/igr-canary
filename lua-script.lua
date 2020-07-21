@@ -72,7 +72,8 @@ game.Players.PlayerAdded:connect(function(player)
 				end
 			end
 		elseif args[1] == "!shout" then
-			msg = table.concat(args, ' ')
+			formattedArgs = table.remove(args, 1)
+			msg = table.concat(formattedArgs, ' ')
 			if(player:GetRankInGroup(groupId) >= requiredRank) then
 				local res = HttpService:GetAsync(server..'shout?msg='..msg..'&key='..key..'&author='..player.Name)
 			end
