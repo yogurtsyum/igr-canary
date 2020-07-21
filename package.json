@@ -1,6 +1,6 @@
 {
   "name": "igr",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "In Game Ranking lets you rank users in a Roblox group through a Roblox game. If at any time during setting it up you need assistance, you can join the support server here: https://discord.gg/J47m7t4",
   "main": "index.js",
   "scripts": {
