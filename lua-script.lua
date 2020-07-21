@@ -30,7 +30,7 @@ game.Players.PlayerAdded:connect(function(player)
 			local user = args[2]
 			if(user) then
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
-					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..key..'&author='..player.Namey)
+					local res = HttpService:GetAsync(server..'promote?user='..user..'&key='..key..'&author='..player.Name)
 				end
 			end
 		elseif args[1] == "!demote" then
