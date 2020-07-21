@@ -212,7 +212,6 @@ app.get('/fire', async (req, res) => {
 
 app.get('/shout', async (req, res) => {
     if(req.query.key !== config.key) return res.sendStatus(401);
-    if(!req.query.user) return res.sendStatus(400);
     let msg = req.query.msg;
     let shoutResponse;
     try {
