@@ -1,4 +1,4 @@
-local groupId = 3281575;
+local groupId = 123;
 local requiredRank = 255;
 local maxRank = 255;
 local server = 'URL'
