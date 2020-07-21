@@ -1,5 +1,5 @@
 ![banner](https://i.gyazo.com/b8a8c4e370ebd880abdcd7e9f1fad19e.png)
-![description](https://i.gyazo.com/7f4ff87435cc23ce090aa3b80535b33a.png)
+![description](https://i.gyazo.com/98b3aca8ea1a649dac74cc79dbd71ca1.png)
 
 **Getting Started**  
 In Game Ranking provides you a way to rank users in a Roblox group through a Roblox game. It's free, easy to setup, and unbranded! The instructions to set it up and host it are available here: https://github.com/yogurtsyum/in-game-ranking/wiki/setup
