@@ -7,6 +7,10 @@ In Game Ranking provides you a way to rank users in a Roblox group through a Rob
 There is currently 1 branches of In Game Ranking available:  
 `master` - The latest version of In Game Ranking with many features.
 
+**Support**   
+If at any time while using qbot you need support with it, then feel free to join our support server here: https://discord.gg/J47m7t4.
+
+**Other Information**   
 License: https://github.com/yogurtsyum/in-game-ranking/blob/master/LICENSE  
 Acknowledgements: https://github.com/yogurtsyum/in-game-ranking/blob/master/acknowledgements.md  
 Contributors: https://github.com/yogurtsyum/in-game-ranking/graphs/contributors   
