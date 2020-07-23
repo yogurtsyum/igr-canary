@@ -61,20 +61,22 @@ app.get('/setrank', async (req, res) => {
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            color: 2127726,
-            description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
-            footer: {
-                text: 'Action Logs'
-            },
-            timestamp: new Date(),
-            thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
-            }
+            embeds: [{
+                color: 2127726,
+                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
+                footer: {
+                    text: 'Action Logs'
+                },
+                timestamp: new Date(),
+                thumbnail: {
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
+                }
+            }]
         })
     });
 });
@@ -105,20 +107,22 @@ app.get('/promote', async (req, res) => {
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            color: 2127726,
-            description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.name} (${promoteResponse.rank}).`,
-            footer: {
-                text: 'Action Logs'
-            },
-            timestamp: new Date(),
-            thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
-            }
+            embeds: [{
+                color: 2127726,
+                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.name} (${promoteResponse.rank}).`,
+                footer: {
+                    text: 'Action Logs'
+                },
+                timestamp: new Date(),
+                thumbnail: {
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
+                }
+            }]
         })
     });
 });
@@ -149,20 +153,22 @@ app.get('/demote', async (req, res) => {
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            color: 2127726,
-            description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.name} (${demoteResponse.rank}).`,
-            footer: {
-                text: 'Action Logs'
-            },
-            timestamp: new Date(),
-            thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
-            }
+            embeds: [{
+                color: 2127726,
+                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.name} (${demoteResponse.rank}).`,
+                footer: {
+                    text: 'Action Logs'
+                },
+                timestamp: new Date(),
+                thumbnail: {
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
+                }
+            }]
         })
     });
 });
@@ -192,20 +198,22 @@ app.get('/fire', async (req, res) => {
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            color: 2127726,
-            description: `${req.query.author} has fired ${username} from ${rankNameInGroup} (${rankInGroup}).`,
-            footer: {
-                text: 'Action Logs'
-            },
-            timestamp: new Date(),
-            thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
-            }
+            embeds: [{
+                color: 2127726,
+                description: `${req.query.author} has fired ${username} from ${rankNameInGroup} (${rankInGroup}).`,
+                footer: {
+                    text: 'Action Logs'
+                },
+                timestamp: new Date(),
+                thumbnail: {
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${username}`
+                }
+            }]
         })
     });
 });
@@ -223,20 +231,22 @@ app.get('/shout', async (req, res) => {
     res.sendStatus(200);
     if(config.logwebhook === 'false') return;
     fetch(config.logwebhook, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            color: 2127726,
-            description: `${req.query.author} has posted a shout:\n\`\`\`${msg}\`\`\``,
-            footer: {
-                text: 'Action Logs'
-            },
-            timestamp: new Date(),
-            thumbnail: {
-                url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${req.query.author}`
-            }
+            embeds: [{
+                color: 2127726,
+                description: `${req.query.author} has posted a shout:\n\`\`\`${msg}\`\`\``,
+                footer: {
+                    text: 'Action Logs'
+                },
+                timestamp: new Date(),
+                thumbnail: {
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${req.query.author}`
+                }
+            }]
         })
     });
 });
