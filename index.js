@@ -190,7 +190,7 @@ app.get('/fire', async (req, res) => {
     }
     let fireResponse;
     try {
-        fireResponse = await roblox.setrank(config.groupId, id, 1);
+        fireResponse = await roblox.setRank(config.groupId, id, 1);
     } catch (err) {
         console.log(chalk.red('An error occured when running the fire function: ' + err));
         return res.sendStatus(500);
