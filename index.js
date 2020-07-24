@@ -68,7 +68,7 @@ app.get('/setrank', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
+                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.newRank.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -114,7 +114,7 @@ app.get('/promote', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.name} (${promoteResponse.rank}).`,
+                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.newRole.name} (${promoteResponse.newRole.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -160,7 +160,7 @@ app.get('/demote', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.name} (${demoteResponse.rank}).`,
+                description: `${req.query.author} has demoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.newRole.name} (${demoteResponse.newRole.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
