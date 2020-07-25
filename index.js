@@ -68,7 +68,7 @@ app.get('/setrank', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.newRank.rank}).`,
+                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
