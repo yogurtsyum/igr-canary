@@ -4,9 +4,9 @@ const chalk = require('chalk');
 const roblox = require('noblox.js');
 const figlet = require('figlet');
 const fetch = require('node-fetch');
-const config = require('./config.json');
+require('dotenv').config();
 
-roblox.setCookie(config.cookie);
+roblox.setCookie(process.env.cookie);
 
 async function getRankName(func_group, func_user){
     let rolename = await roblox.getRankNameInGroup(func_group, func_user);
@@ -32,7 +32,7 @@ app.get('/', async (req, res) => {
   });
   
 app.get('/setrank', async (req, res) => {
-    if(req.query.key !== config.key) return res.sendStatus(401);
+    if(req.query.key !== process.env.key) return res.sendStatus(401);
     if(!req.query.user || !req.query.rank || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let rank = Number(req.query.rank);
@@ -45,22 +45,22 @@ app.get('/setrank', async (req, res) => {
     } catch {
         return res.sendStatus(400);
     }
-    let rankInGroup = await getRankID(config.groupId, id);
-    let rankNameInGroup = await getRankName(config.groupId, id);
-    if(config.maximumRank <= rankInGroup){
+    let rankInGroup = await getRankID(Number(process.env.groupId), id);
+    let rankNameInGroup = await getRankName(Number(process.env.groupId), id);
+    if(Number(process.env.maximumRank) <= rankInGroup || Number(process.env.maximumRank) <= rank){
         return res.sendStatus(400);
     }
     let setRankResponse;
     try {
-        setRankResponse = await roblox.setRank(config.groupId, id, rank);
+        setRankResponse = await roblox.setRank(Number(process.env.groupId), id, rank);
     } catch (err) {
         console.log(chalk.red('An error occured when running the setrank function: ' + err));
         return res.sendStatus(500);
     }
-    let newRankName = await getRankName(config.groupId, id);
+    let newRankName = await getRankName(Number(process.env.groupId), id);
     res.sendStatus(200);
-    if(config.logwebhook === 'false') return;
-    fetch(config.logwebhook, {
+    if(process.env.logwebhook === 'false') return;
+    fetch(process.env.logwebhook, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ app.get('/setrank', async (req, res) => {
 });
   
 app.get('/promote', async (req, res) => {
-    if(req.query.key !== config.key) return res.sendStatus(401);
+    if(req.query.key !== process.env.key) return res.sendStatus(401);
     if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
@@ -91,22 +91,22 @@ app.get('/promote', async (req, res) => {
     } catch {
         return res.sendStatus(400);
     }
-    let rankInGroup = await getRankID(config.groupId, id);
-    let rankNameInGroup = await getRankName(config.groupId, id);
-    if(config.maximumRank <= rankInGroup){
+    let rankInGroup = await getRankID(Number(process.env.groupId), id);
+    let rankNameInGroup = await getRankName(Number(process.env.groupId), id);
+    if(Number(process.env.maximumRank) <= rankInGroup || Number(process.env.maximumRank) <= rankInGroup + 1){
         return res.sendStatus(400);
     }
     let promoteResponse;
     try {
-        promoteResponse = await roblox.promote(config.groupId, id);
+        promoteResponse = await roblox.promote(Number(process.env.groupId), id);
     } catch (err) {
         console.log(chalk.red('An error occured when running the promote function: ' + err));
         return res.sendStatus(500);
     }
-    let newRankName = await getRankName(config.groupId, id);
+    let newRankName = await getRankName(Number(process.env.groupId), id);
     res.sendStatus(200);
-    if(config.logwebhook === 'false') return;
-    fetch(config.logwebhook, {
+    if(process.env.logwebhook === 'false') return;
+    fetch(process.env.logwebhook, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ app.get('/promote', async (req, res) => {
 });
 
 app.get('/demote', async (req, res) => {
-    if(req.query.key !== config.key) return res.sendStatus(401);
+    if(req.query.key !== process.env.key) return res.sendStatus(401);
     if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
@@ -137,22 +137,22 @@ app.get('/demote', async (req, res) => {
     } catch {
         return res.sendStatus(400);
     }
-    let rankInGroup = await getRankID(config.groupId, id);
-    let rankNameInGroup = await getRankName(config.groupId, id);
-    if(config.maximumRank <= rankInGroup){
+    let rankInGroup = await getRankID(Number(process.env.groupId), id);
+    let rankNameInGroup = await getRankName(Number(process.env.groupId), id);
+    if(Number(process.env.maximumRank) <= rankInGroup){
         return res.sendStatus(400);
     }
     let demoteResponse;
     try {
-        demoteResponse = await roblox.demote(config.groupId, id);
+        demoteResponse = await roblox.demote(Number(process.env.groupId), id);
     } catch (err) {
         console.log(chalk.red('An error occured when running the promote function: ' + err));
         return res.sendStatus(500);
     }
-    let newRankName = await getRankName(config.groupId, id);
+    let newRankName = await getRankName(Number(process.env.groupId), id);
     res.sendStatus(200);
-    if(config.logwebhook === 'false') return;
-    fetch(config.logwebhook, {
+    if(process.env.logwebhook === 'false') return;
+    fetch(process.env.logwebhook, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -174,7 +174,7 @@ app.get('/demote', async (req, res) => {
 });
 
 app.get('/fire', async (req, res) => {
-    if(req.query.key !== config.key) return res.sendStatus(401);
+    if(req.query.key !== process.env.key) return res.sendStatus(401);
     if(!req.query.user || !req.query.author) return res.sendStatus(400);
     let username = req.query.user;
     let id;
@@ -183,21 +183,21 @@ app.get('/fire', async (req, res) => {
     } catch {
         return res.sendStatus(400);
     }
-    let rankInGroup = await getRankID(config.groupId, id);
-    let rankNameInGroup = await getRankName(config.groupId, id);
-    if(config.maximumRank <= rankInGroup){
+    let rankInGroup = await getRankID(Number(process.env.groupId), id);
+    let rankNameInGroup = await getRankName(Number(process.env.groupId), id);
+    if(Number(process.env.maximumRank) <= rankInGroup){
         return res.sendStatus(400);
     }
     let fireResponse;
     try {
-        fireResponse = await roblox.setRank(config.groupId, id, 1);
+        fireResponse = await roblox.setRank(Number(process.env.groupId), id, 1);
     } catch (err) {
         console.log(chalk.red('An error occured when running the fire function: ' + err));
         return res.sendStatus(500);
     }
     res.sendStatus(200);
-    if(config.logwebhook === 'false') return;
-    fetch(config.logwebhook, {
+    if(process.env.logwebhook === 'false') return;
+    fetch(process.env.logwebhook, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
@@ -219,18 +219,18 @@ app.get('/fire', async (req, res) => {
 });
 
 app.get('/shout', async (req, res) => {
-    if(req.query.key !== config.key) return res.sendStatus(401);
+    if(req.query.key !== process.env.key) return res.sendStatus(401);
     let msg = req.query.msg;
     let shoutResponse;
     try {
-        shoutResponse = await roblox.shout(config.groupId, msg);
+        shoutResponse = await roblox.shout(Number(process.env.groupId), msg);
     } catch (err) {
         console.log(chalk.red('An error occured when running the shout function: ' + err));
         return res.sendStatus(500);
     }
     res.sendStatus(200);
-    if(config.logwebhook === 'false') return;
-    fetch(config.logwebhook, {
+    if(process.env.logwebhook === 'false') return;
+    fetch(process.env.logwebhook, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json'
