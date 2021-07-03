@@ -29,7 +29,7 @@ async function getRankFromName(func_rankname, func_group){
     return role.rank;
 }
 
-app.post('/', jsonParser, async (req, res) => {
+app.get('/', async (req, res) => {
     res.sendStatus(200);
 });
   
