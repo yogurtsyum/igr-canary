@@ -4,9 +4,11 @@ const chalk = require('chalk');
 const roblox = require('noblox.js');
 const figlet = require('figlet');
 const fetch = require('node-fetch');
+const bodyParser = require('body-parser');
 require('dotenv').config();
 
 roblox.setCookie(process.env.cookie);
+const jsonParser = bodyParser.json();
 
 async function getRankName(func_group, func_user){
     let rolename = await roblox.getRankNameInGroup(func_group, func_user);
@@ -27,15 +29,15 @@ async function getRankFromName(func_rankname, func_group){
     return role.rank;
 }
 
-app.get('/', async (req, res) => {
+app.post('/', jsonParser, async (req, res) => {
     res.sendStatus(200);
-  });
+});
   
-app.get('/setrank', async (req, res) => {
-    if(req.query.key !== process.env.key) return res.sendStatus(401);
-    if(!req.query.user || !req.query.rank || !req.query.author) return res.sendStatus(400);
-    let username = req.query.user;
-    let rank = Number(req.query.rank);
+app.post('/setrank', jsonParser, async (req, res) => {
+    if(req.body.key !== process.env.key) return res.sendStatus(401);
+    if(!req.body.user || !req.body.rank || !req.body.author) return res.sendStatus(400);
+    let username = req.body.user;
+    let rank = Number(req.body.rank);
     if(!rank){
         return res.sendStatus(400);
     }
@@ -68,7 +70,7 @@ app.get('/setrank', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
+                description: `${req.body.author} has ranked ${username} from ${rankNameInGroup} (${rankInGroup}) to ${setRankResponse.name} (${setRankResponse.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -81,10 +83,10 @@ app.get('/setrank', async (req, res) => {
     });
 });
   
-app.get('/promote', async (req, res) => {
-    if(req.query.key !== process.env.key) return res.sendStatus(401);
-    if(!req.query.user || !req.query.author) return res.sendStatus(400);
-    let username = req.query.user;
+app.post('/promote', jsonParser, async (req, res) => {
+    if(req.body.key !== process.env.key) return res.sendStatus(401);
+    if(!req.body.user || !req.body.author) return res.sendStatus(400);
+    let username = req.body.user;
     let id;
     try {
         id = await roblox.getIdFromUsername(username);
@@ -114,7 +116,7 @@ app.get('/promote', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.newRole.name} (${promoteResponse.newRole.rank}).`,
+                description: `${req.body.author} has promoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${promoteResponse.newRole.name} (${promoteResponse.newRole.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -127,10 +129,10 @@ app.get('/promote', async (req, res) => {
     });
 });
 
-app.get('/demote', async (req, res) => {
-    if(req.query.key !== process.env.key) return res.sendStatus(401);
-    if(!req.query.user || !req.query.author) return res.sendStatus(400);
-    let username = req.query.user;
+app.post('/demote', jsonParser, async (req, res) => {
+    if(req.body.key !== process.env.key) return res.sendStatus(401);
+    if(!req.body.user || !req.body.author) return res.sendStatus(400);
+    let username = req.body.user;
     let id;
     try {
         id = await roblox.getIdFromUsername(username);
@@ -160,7 +162,7 @@ app.get('/demote', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has demoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.newRole.name} (${demoteResponse.newRole.rank}).`,
+                description: `${req.body.author} has demoted ${username} from ${rankNameInGroup} (${rankInGroup}) to ${demoteResponse.newRole.name} (${demoteResponse.newRole.rank}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -173,10 +175,10 @@ app.get('/demote', async (req, res) => {
     });
 });
 
-app.get('/fire', async (req, res) => {
-    if(req.query.key !== process.env.key) return res.sendStatus(401);
-    if(!req.query.user || !req.query.author) return res.sendStatus(400);
-    let username = req.query.user;
+app.post('/fire', jsonParser, async (req, res) => {
+    if(req.body.key !== process.env.key) return res.sendStatus(401);
+    if(!req.body.user || !req.body.author) return res.sendStatus(400);
+    let username = req.body.user;
     let id;
     try {
         id = await roblox.getIdFromUsername(username);
@@ -205,7 +207,7 @@ app.get('/fire', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has fired ${username} from ${rankNameInGroup} (${rankInGroup}).`,
+                description: `${req.body.author} has fired ${username} from ${rankNameInGroup} (${rankInGroup}).`,
                 footer: {
                     text: 'Action Logs'
                 },
@@ -218,9 +220,9 @@ app.get('/fire', async (req, res) => {
     });
 });
 
-app.get('/shout', async (req, res) => {
-    if(req.query.key !== process.env.key) return res.sendStatus(401);
-    let msg = req.query.msg;
+app.post('/shout', jsonParser, async (req, res) => {
+    if(req.body.key !== process.env.key) return res.sendStatus(401);
+    let msg = req.body.msg;
     let shoutResponse;
     try {
         shoutResponse = await roblox.shout(Number(process.env.groupId), msg);
@@ -238,13 +240,13 @@ app.get('/shout', async (req, res) => {
         body: JSON.stringify({
             embeds: [{
                 color: 2127726,
-                description: `${req.query.author} has posted a shout:\n\`\`\`${msg}\`\`\``,
+                description: `${req.body.author} has posted a shout:\n\`\`\`${msg}\`\`\``,
                 footer: {
                     text: 'Action Logs'
                 },
                 timestamp: new Date(),
                 thumbnail: {
-                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${req.query.author}`
+                    url: `http://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&format=png&username=${req.body.author}`
                 }
             }]
         })
