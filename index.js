@@ -4,11 +4,11 @@ const chalk = require('chalk');
 const roblox = require('noblox.js');
 const figlet = require('figlet');
 const fetch = require('node-fetch');
-const bodyParser = require('body-parser');
 require('dotenv').config();
 
 roblox.setCookie(process.env.cookie);
-const jsonParser = bodyParser.json();
+
+app.use(express.json());
 
 async function getRankName(func_group, func_user){
     let rolename = await roblox.getRankNameInGroup(func_group, func_user);
@@ -33,7 +33,7 @@ app.get('/', async (req, res) => {
     res.sendStatus(200);
 });
   
-app.post('/setrank', jsonParser, async (req, res) => {
+app.post('/setrank', async (req, res) => {
     if(req.body.key !== process.env.key) return res.sendStatus(401);
     if(!req.body.user || !req.body.rank || !req.body.author) return res.sendStatus(400);
     let username = req.body.user;
@@ -83,7 +83,7 @@ app.post('/setrank', jsonParser, async (req, res) => {
     });
 });
   
-app.post('/promote', jsonParser, async (req, res) => {
+app.post('/promote', async (req, res) => {
     if(req.body.key !== process.env.key) return res.sendStatus(401);
     if(!req.body.user || !req.body.author) return res.sendStatus(400);
     let username = req.body.user;
@@ -129,7 +129,7 @@ app.post('/promote', jsonParser, async (req, res) => {
     });
 });
 
-app.post('/demote', jsonParser, async (req, res) => {
+app.post('/demote', async (req, res) => {
     if(req.body.key !== process.env.key) return res.sendStatus(401);
     if(!req.body.user || !req.body.author) return res.sendStatus(400);
     let username = req.body.user;
@@ -175,7 +175,7 @@ app.post('/demote', jsonParser, async (req, res) => {
     });
 });
 
-app.post('/fire', jsonParser, async (req, res) => {
+app.post('/fire', async (req, res) => {
     if(req.body.key !== process.env.key) return res.sendStatus(401);
     if(!req.body.user || !req.body.author) return res.sendStatus(400);
     let username = req.body.user;
@@ -220,7 +220,7 @@ app.post('/fire', jsonParser, async (req, res) => {
     });
 });
 
-app.post('/shout', jsonParser, async (req, res) => {
+app.post('/shout', async (req, res) => {
     if(req.body.key !== process.env.key) return res.sendStatus(401);
     let msg = req.body.msg;
     let shoutResponse;
