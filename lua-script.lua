@@ -38,8 +38,8 @@ function slice(tbl, first, last, step)
   return sliced
 end
 
-game.Players.PlayerAdded:connect(function(player)
-	player.Chatted:connect(function(msg)
+game.Players.PlayerAdded:Connect(function(player)
+	player.Chatted:Connect(function(msg)
 		local args = msg:split(" ")
 		if args[1] == "!setrank" then
 			local user = args[2]
@@ -47,35 +47,56 @@ game.Players.PlayerAdded:connect(function(player)
 			rank = table.concat(rank, ' ')
 			if(user and rank) then
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
-					local res = HttpService:PostAsync(server..'shout', '{ user: '..user..', key: '..key..', rank: '..key..', author: '..player.Name..' }')
+					local res = HttpService:PostAsync(server..'setrank', HttpService:JSONEncode({
+						user = user,
+						rank = rank,
+						author = player.Name,
+						key = key
+					}))
 				end
 			end
 		elseif args[1] == "!promote" then
 			local user = args[2]
 			if(user) then
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
-					local res = HttpService:PostAsync(server..'promote', '{ user: '..user..', key: '..key..', author: '..player.Name..' }')
+					local res = HttpService:PostAsync(server..'promote', HttpService:JSONEncode({
+						user = user,
+						author = player.Name,
+						key = key
+					}))
 				end
 			end
 		elseif args[1] == "!demote" then
 			local user = args[2]
 			if(user) then
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
-					local res = HttpService:PostAsync(server..'demote', '{ user: '..user..', key: '..key..', author: '..player.Name..' }')
+					local res = HttpService:PostAsync(server..'demote', HttpService:JSONEncode({
+						user = user,
+						author = player.Name,
+						key = key
+					}))
 				end
 			end
 		elseif args[1] == "!fire" then
 			local user = args[2]
 			if(user) then
 				if(player:GetRankInGroup(groupId) >= requiredRank) then
-					local res = HttpService:PostAsync(server..'fire', '{ user: '..user..', key: '..key..', author: '..player.Name..' }')
+					local res = HttpService:PostAsync(server..'fire', HttpService:JSONEncode({
+						user = user,
+						author = player.Name,
+						key = key
+					}))
 				end
 			end
 		elseif args[1] == "!shout" then
 			table.remove(args, 1)
 			local msg = table.concat(args, ' ')
 			if(player:GetRankInGroup(groupId) >= requiredRank) then
-				local res = HttpService:PostAsync(server..'shout', '{ user: '..user..', key: '..key..', author: '..player.Name..', msg: '..msg..' }')
+				local res = HttpService:PostAsync(server..'shout', HttpService:JSONEncode({
+						msg = msg,
+						author = player.Name,
+						key = key
+					}))
 			end
 		end
 	end)
